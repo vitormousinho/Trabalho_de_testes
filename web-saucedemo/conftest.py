@@ -1,6 +1,7 @@
 import os
 
 import pytest
+from pages.login_page import LoginPage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -34,4 +35,12 @@ def sauce_user() -> str:
 @pytest.fixture
 def sauce_password() -> str:
     return os.getenv("SAUCE_PASSWORD", "secret_sauce")
+
+
+@pytest.fixture
+def logged_in_driver(driver, base_url: str, sauce_user: str, sauce_password: str):
+    page = LoginPage(driver)
+    page.load(base_url)
+    page.login(sauce_user, sauce_password)
+    return driver
 

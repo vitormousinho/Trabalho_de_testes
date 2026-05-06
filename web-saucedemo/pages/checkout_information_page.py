@@ -5,6 +5,17 @@ from pages.base_page import BasePage
 
 
 class CheckoutInformationPage(BasePage):
+    _js_set_field = """
+        const input = arguments[0];
+        const text = arguments[1];
+        const setter = Object.getOwnPropertyDescriptor(
+          window.HTMLInputElement.prototype,
+          'value'
+        ).set;
+        setter.call(input, text);
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    """
     _first_name = (By.ID, "first-name")
     _last_name = (By.ID, "last-name")
     _postal_code = (By.ID, "postal-code")
@@ -15,13 +26,14 @@ class CheckoutInformationPage(BasePage):
         self.wait().until(EC.visibility_of_element_located(self._first_name))
 
     def fill_and_continue(self, first_name: str, last_name: str, postal_code: str) -> None:
-        self.driver.find_element(*self._first_name).clear()
-        self.driver.find_element(*self._first_name).send_keys(first_name)
-        self.driver.find_element(*self._last_name).clear()
-        self.driver.find_element(*self._last_name).send_keys(last_name)
-        self.driver.find_element(*self._postal_code).clear()
-        self.driver.find_element(*self._postal_code).send_keys(postal_code)
-        self.wait().until(EC.element_to_be_clickable(self._continue_btn)).click()
+        el_fn = self.driver.find_element(*self._first_name)
+        el_ln = self.driver.find_element(*self._last_name)
+        el_zip = self.driver.find_element(*self._postal_code)
+        self.driver.execute_script(self._js_set_field, el_fn, first_name)
+        self.driver.execute_script(self._js_set_field, el_ln, last_name)
+        self.driver.execute_script(self._js_set_field, el_zip, postal_code)
+        btn_continue = self.wait().until(EC.element_to_be_clickable(self._continue_btn))
+        self.driver.execute_script("arguments[0].click();", btn_continue)
 
         def _navigated_or_error(drv) -> bool:
             if "checkout-step-two" in drv.current_url:

@@ -64,8 +64,8 @@ pytest -q tests/test_pet.py
 
 ## Prints do funcionamento (reservado)
 
-![Testes API parte 1](assets/1.png)
-![Testes API parte 2](assets/2.png)
+![Testes API parte 1](asset/1.png)
+![Testes API parte 2](asset/2.png)
 
 ---
 
@@ -127,5 +127,5 @@ web-saucedemo/
 
 ### Prints do funcionamento (reservado)
 
-![Testes Web parte 1](assets/3.png)
-![Testes Web parte 2](assets/4.png)
+![Testes Web parte 1](asset/3.png)
+![Testes Web parte 2](asset/4.png)

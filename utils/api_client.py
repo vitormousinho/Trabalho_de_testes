@@ -11,4 +11,5 @@ class PetStoreClient:
     def request(self, method: str, path: str, **kwargs):
         path = path if path.startswith("/") else f"/{path}"
         url = f"{self.base_url}{path}"
+        kwargs.setdefault("timeout", 15)
         return self.session.request(method, url, **kwargs)

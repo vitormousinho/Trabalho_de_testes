@@ -23,10 +23,9 @@ jobs:
           pip install -r web-saucedemo/requirements.txt
 
       - name: "Testes — API (Swagger Petstore)"
-        continue-on-error: true
         run: python -m pytest -q
 
       - name: "Testes — Web (SauceDemo)"
-        continue-on-error: true
+        if: always()
         run: python -m pytest -q -c web-saucedemo/pytest.ini web-saucedemo/tests
 

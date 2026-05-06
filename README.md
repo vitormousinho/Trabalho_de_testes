@@ -63,7 +63,9 @@ pytest -q tests/test_pet.py
 ```
 
 ## Prints do funcionamento (reservado)
-- (Cole aqui prints da execução local do `pytest` e do workflow no GitHub Actions)
+
+![Testes API parte 1](assets/1.png)
+![Testes API parte 2](assets/2.png)
 
 ---
 
@@ -124,4 +126,6 @@ web-saucedemo/
 ```
 
 ### Prints do funcionamento (reservado)
-- (Cole aqui prints da execução local do pytest e do workflow no GitHub Actions)
+
+![Testes Web parte 1](assets/3.png)
+![Testes Web parte 2](assets/4.png)

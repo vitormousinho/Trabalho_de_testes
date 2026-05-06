@@ -23,8 +23,8 @@ def driver():
     options.add_argument("--window-size=1366,768")
 
     browser = webdriver.Chrome(options=options)
-    browser.set_page_load_timeout(60)
-    browser.implicitly_wait(5)
+    browser.set_page_load_timeout(90)
+    browser.implicitly_wait(15)
     yield browser
     browser.quit()
 

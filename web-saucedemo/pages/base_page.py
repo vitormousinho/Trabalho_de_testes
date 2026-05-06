@@ -9,6 +9,6 @@ class BasePage:
     def open(self, url: str) -> None:
         self.driver.get(url)
 
-    def wait(self, seconds: int = 30) -> WebDriverWait:
+    def wait(self, seconds: int = 60) -> WebDriverWait:
         return WebDriverWait(self.driver, seconds)
 

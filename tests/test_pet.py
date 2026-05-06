@@ -55,7 +55,7 @@ class TestPetErrorsAndValidation:
         r = api_client.request("GET", "/pet/not-a-number")
         assert r.status_code in (400, 404)
 
-    def test_create_pet_missing_required_field_fails(self, api_client: PetStoreClient):
+    def test_create_pet_without_photo_urls(self, api_client: PetStoreClient):
         incomplete = {"id": unique_int_id(), "name": "NoUrls"}
         r = api_client.request("POST", "/pet", json=incomplete)
         assert r.status_code in (200, 400, 405)

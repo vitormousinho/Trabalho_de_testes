@@ -40,8 +40,8 @@ def sauce_password() -> str:
 
 @pytest.fixture
 def logged_in_driver(driver, base_url: str, sauce_user: str, sauce_password: str):
+    driver.get(base_url)
     page = LoginPage(driver)
-    page.load(base_url)
     page.login(sauce_user, sauce_password)
     return driver
 

@@ -1,3 +1,5 @@
+Este repositório é **único**, mas agrupa **dois projetos independentes**: automação **API** (Petstore na raiz) e automação **WEB** (pasta `web-saucedemo/`). Cada um tem seu próprio `requirements.txt` e conjunto de testes; o CI roda os dois.
+
 ## Projeto 1 — API (Swagger Petstore)
 Automação de testes de **API** para o **Swagger Petstore** (base URL: `https://petstore.swagger.io/v2`) usando **pytest** + **requests**.
 

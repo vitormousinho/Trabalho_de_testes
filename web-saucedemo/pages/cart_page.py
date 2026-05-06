@@ -18,7 +18,9 @@ class CartPage(BasePage):
     def remove_backpack(self) -> None:
         rm = self.driver.find_element(By.ID, "remove-sauce-labs-backpack")
         self.driver.execute_script("arguments[0].click();", rm)
-        self.wait().until_not(EC.presence_of_element_located(self._cart_items))
+        self.wait(30).until(
+            lambda d: len(d.find_elements(By.CLASS_NAME, "cart_item")) == 0
+        )
 
     def start_checkout(self) -> None:
         self.driver.find_element(*self._checkout_btn).click()

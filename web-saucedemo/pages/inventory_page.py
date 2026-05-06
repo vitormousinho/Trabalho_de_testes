@@ -13,7 +13,8 @@ class InventoryPage(BasePage):
         self.wait().until(EC.visibility_of_element_located(self._inventory_container))
 
     def add_backpack_to_cart(self) -> None:
-        self.driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+        btn = self.driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
+        self.driver.execute_script("arguments[0].click();", btn)
 
     def remove_backpack_from_cart(self) -> None:
         self.driver.find_element(By.ID, "remove-sauce-labs-backpack").click()

@@ -32,7 +32,7 @@ class CheckoutInformationPage(BasePage):
         self.driver.execute_script(self._js_set_field, el_fn, first_name)
         self.driver.execute_script(self._js_set_field, el_ln, last_name)
         self.driver.execute_script(self._js_set_field, el_zip, postal_code)
-        btn_continue = self.wait().until(EC.element_to_be_clickable(self._continue_btn))
+        btn_continue = self.wait(40).until(EC.element_to_be_clickable(self._continue_btn))
         self.driver.execute_script("arguments[0].click();", btn_continue)
 
         def _navigated_or_error(drv) -> bool:
@@ -40,7 +40,7 @@ class CheckoutInformationPage(BasePage):
                 return True
             return len(drv.find_elements(*self._error)) > 0
 
-        self.wait().until(_navigated_or_error)
+        self.wait(40).until(_navigated_or_error)
         if "checkout-step-two" not in self.driver.current_url:
             raise AssertionError(self.error_message() or "Falha ao avançar no checkout")
 

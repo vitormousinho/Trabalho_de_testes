@@ -105,6 +105,8 @@ Rodar um arquivo específico:
 python -m pytest -q -c web-saucedemo/pytest.ini web-saucedemo/tests/test_login.py
 ```
 
+> **Observação CI/CD:** No pipeline os testes de login são validados automaticamente. Os testes de carrinho e checkout rodam localmente (ambos passam — ver prints acima).
+
 ### Estrutura de pastas (WEB)
 ```
 web-saucedemo/

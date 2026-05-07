@@ -41,4 +41,5 @@ jobs:
           pip install -r web-saucedemo/requirements.txt
 
       - name: Run Web tests
-        run: python -m pytest -v -c web-saucedemo/pytest.ini web-saucedemo/tests/
+        working-directory: ./web-saucedemo
+        run: pytest tests/

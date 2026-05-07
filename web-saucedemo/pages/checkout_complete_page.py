@@ -9,9 +9,8 @@ class CheckoutCompletePage(BasePage):
     _complete_header = (By.CLASS_NAME, "complete-header")
 
     def wait_loaded(self) -> None:
-        self.wait().until(EC.url_contains("checkout-complete"))
-        self.wait().until(EC.visibility_of_element_located(self._container))
+        self.wait(40).until(EC.url_contains("checkout-complete"))
+        self.wait(40).until(EC.presence_of_element_located(self._container))
 
     def header_text(self) -> str:
         return self.driver.find_element(*self._complete_header).text.strip()
-

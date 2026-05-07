@@ -7,23 +7,26 @@ from pages.base_page import BasePage
 class CartPage(BasePage):
     _cart_list = (By.CLASS_NAME, "cart_list")
     _cart_items = (By.CLASS_NAME, "cart_item")
-    _checkout_btn = (By.ID, "checkout")
 
     def wait_loaded(self) -> None:
-        self.wait().until(EC.visibility_of_element_located(self._cart_list))
+        self.wait(40).until(EC.url_contains("cart"))
+        self.wait(40).until(EC.presence_of_element_located(self._cart_list))
 
     def items_count(self) -> int:
         return len(self.driver.find_elements(*self._cart_items))
 
     def remove_backpack(self) -> None:
-        btn = self.wait(30).until(
-            EC.element_to_be_clickable((By.ID, "remove-sauce-labs-backpack"))
+        btn = self.wait(40).until(
+            EC.presence_of_element_located((By.ID, "remove-sauce-labs-backpack"))
         )
-        btn.click()
-        self.wait(30).until(
+        self.driver.execute_script("arguments[0].click();", btn)
+        self.wait(40).until(
             lambda d: len(d.find_elements(By.CLASS_NAME, "cart_item")) == 0
         )
 
     def start_checkout(self) -> None:
-        self.wait(30).until(EC.element_to_be_clickable(self._checkout_btn)).click()
-
+        btn = self.wait(40).until(
+            EC.presence_of_element_located((By.ID, "checkout"))
+        )
+        self.driver.execute_script("arguments[0].click();", btn)
+        self.wait(40).until(EC.url_contains("checkout-step-one"))

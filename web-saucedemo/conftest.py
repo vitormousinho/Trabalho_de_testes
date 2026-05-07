@@ -4,6 +4,8 @@ import pytest
 from pages.login_page import LoginPage
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 BASE_URL = "https://www.saucedemo.com/"
@@ -24,8 +26,6 @@ def driver():
     options.add_argument("--window-size=1920,1080")
 
     browser = webdriver.Chrome(options=options)
-    browser.set_page_load_timeout(90)
-    browser.implicitly_wait(15)
     yield browser
     browser.quit()
 
@@ -45,5 +45,5 @@ def logged_in_driver(driver, base_url: str, sauce_user: str, sauce_password: str
     driver.get(base_url)
     page = LoginPage(driver)
     page.login(sauce_user, sauce_password)
+    WebDriverWait(driver, 40).until(EC.url_contains("inventory"))
     return driver
-

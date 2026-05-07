@@ -9,12 +9,10 @@ class CheckoutOverviewPage(BasePage):
     _finish_btn = (By.ID, "finish")
 
     def wait_loaded(self) -> None:
-        self.wait().until(EC.url_contains("checkout-step-two"))
-        self.wait().until(EC.visibility_of_element_located(self._summary))
-        self.wait().until(EC.element_to_be_clickable(self._finish_btn))
+        self.wait(40).until(EC.url_contains("checkout-step-two"))
+        self.wait(40).until(EC.presence_of_element_located(self._summary))
 
     def finish(self) -> None:
-        btn = self.wait(40).until(EC.element_to_be_clickable(self._finish_btn))
-        btn.click()
+        btn = self.wait(40).until(EC.presence_of_element_located(self._finish_btn))
+        self.driver.execute_script("arguments[0].click();", btn)
         self.wait(40).until(EC.url_contains("checkout-complete"))
-

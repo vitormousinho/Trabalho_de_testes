@@ -44,4 +44,4 @@ jobs:
         uses: browser-actions/setup-chrome@v1
 
       - name: Run Web tests
-        run: python -m pytest -v -c web-saucedemo/pytest.ini web-saucedemo/tests/test_login.py
+        run: python -m pytest -v -c web-saucedemo/pytest.ini web-saucedemo/tests/

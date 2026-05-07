@@ -131,3 +131,4 @@ web-saucedemo/
 
 ![Testes Web parte 1](asset/3.png)
 ![Testes Web parte 2](asset/4.png)
+![Testes no GitHub Actions (CI)](asset/5.png)

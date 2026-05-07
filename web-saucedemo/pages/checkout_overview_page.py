@@ -14,7 +14,7 @@ class CheckoutOverviewPage(BasePage):
         self.wait().until(EC.element_to_be_clickable(self._finish_btn))
 
     def finish(self) -> None:
-        btn = self.driver.find_element(*self._finish_btn)
-        self.driver.execute_script("arguments[0].click();", btn)
+        btn = self.wait(40).until(EC.element_to_be_clickable(self._finish_btn))
+        btn.click()
         self.wait(40).until(EC.url_contains("checkout-complete"))
 

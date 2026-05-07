@@ -16,16 +16,16 @@ class InventoryPage(BasePage):
         btn = self.wait(30).until(
             EC.element_to_be_clickable((By.ID, "add-to-cart-sauce-labs-backpack"))
         )
-        self.driver.execute_script("arguments[0].click();", btn)
+        btn.click()
         self.wait(30).until(
-            lambda d: d.find_elements(By.CLASS_NAME, "shopping_cart_badge")
+            EC.visibility_of_element_located((By.CLASS_NAME, "shopping_cart_badge"))
         )
 
     def remove_backpack_from_cart(self) -> None:
         self.driver.find_element(By.ID, "remove-sauce-labs-backpack").click()
 
     def open_cart(self) -> None:
-        self.driver.find_element(*self._cart_link).click()
+        self.wait(30).until(EC.element_to_be_clickable(self._cart_link)).click()
 
     def cart_badge_count(self) -> int:
         els = self.driver.find_elements(*self._cart_badge)

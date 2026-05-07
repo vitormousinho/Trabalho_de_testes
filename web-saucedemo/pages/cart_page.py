@@ -19,11 +19,11 @@ class CartPage(BasePage):
         btn = self.wait(30).until(
             EC.element_to_be_clickable((By.ID, "remove-sauce-labs-backpack"))
         )
-        self.driver.execute_script("arguments[0].click();", btn)
+        btn.click()
         self.wait(30).until(
             lambda d: len(d.find_elements(By.CLASS_NAME, "cart_item")) == 0
         )
 
     def start_checkout(self) -> None:
-        self.driver.find_element(*self._checkout_btn).click()
+        self.wait(30).until(EC.element_to_be_clickable(self._checkout_btn)).click()
 
